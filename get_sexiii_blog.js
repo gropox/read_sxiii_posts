@@ -69,12 +69,12 @@ async function processTransaction(tr) {
     if(op == "comment" && opBody.parent_author == "") {
    
         if(PERMLINKS.includes(opBody.permlink)) {
-            //ледактирование поста, игнорируем
+            //редактирование поста, игнорируем
             console.log("редактирование " + opBody.permlink);
             return;
         }
         PERMLINKS.push(opBody.permlink);
-        console.log(tr.block + "\t" + tr.timestamp + "\t" + JSON.stringify(opBody.body));
+        console.log(tr.block + "\t" + tr.timestamp + "\t" + JSON.stringify(opBody));
     }
 }
 
