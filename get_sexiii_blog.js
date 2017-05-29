@@ -21,11 +21,14 @@ async function readHistory() {
     let start = 2001;
     let count = 2000;
     
-    while(start < LAST_ID) {
+    while(start <= LAST_ID) {
         console.log("start = " + start + " count = " + count);
         let heArr = await steem.api.getAccountHistoryAsync(USERID, start, count);
         filterAccountHistory(heArr);
-        if(start + count > LAST_ID) {
+        
+        if(start == LAST_ID) {
+            break;
+        } else if(start + count > LAST_ID) {
             count = LAST_ID - start;
             start = LAST_ID;
         } else {
