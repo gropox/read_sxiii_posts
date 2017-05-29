@@ -1,5 +1,4 @@
-
-
+require('events').EventEmitter.prototype._maxListeners = 100;
 var steem = require("steem")
 
 steem.config.set('websocket',"wss://ws.golos.io");
@@ -81,7 +80,7 @@ async function processTransaction(tr) {
         //Получаем контент
         let content = await steem.api.getContentAsync(opBody.author, opBody.permlink);
         if(content.permlink == opBody.permlink) {
-            console.log(`[${content.title}](https://golos.io/@${content.author}/${content.permlink} + " | " + ${content.total_payout_value}`);
+            console.log(`[${content.title}](https://golos.io/@${content.author}/${content.permlink} | ${content.total_payout_value}`);
         }
     }
 }
