@@ -73,11 +73,16 @@ async function processTransaction(tr) {
    
         if(PERMLINKS.includes(opBody.permlink)) {
             //редактирование поста, игнорируем
-            console.log("редактирование " + opBody.permlink);
+            //console.log("редактирование " + opBody.permlink);
             return;
         }
         PERMLINKS.push(opBody.permlink);
-        console.log(tr.block + "\t" + tr.timestamp + "\t" + JSON.stringify(opBody));
+        
+        //Получаем контент
+        let content = await steem.api.getContentAsync(opBody.author, opBody.permlink);
+        if(content.permlink == opBody.permlink) {
+            console.log(`[${content.title}](https://golos.io/@${content.author}/${content.permlink} + " | " + ${content.total_payout_value}`);
+        }
     }
 }
 
